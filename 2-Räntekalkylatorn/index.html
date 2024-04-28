@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Räntekalkylator</title>
+  <!-- Lägg till Vue-CDN här -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+</head>
+<body>
+
+<div id="app">
+  <h1>Räntekalkylator</h1>
+  
+  <!-- Inmatningsfält för huvudbeloppet, räntesatsen och tiden -->
+  <div>
+    <label for="principal">Huvudbelopp:</label>
+    <input v-model.number="principal" type="number" id="principal" placeholder="Ange huvudbelopp">
+  </div>
+  
+  <div>
+    <label for="interestRate">Räntesats (%):</label>
+    <input v-model.number="interestRate" type="number" id="interestRate" placeholder="Ange räntesats">
+  </div>
+  
+  <div>
+    <label for="time">Tid (år):</label>
+    <input v-model.number="time" type="number" id="time" placeholder="Ange tid i år">
+  </div>
+  
+  <!-- Visa den beräknade enkla räntan -->
+  <div>
+    <h2>Enkel ränta: {{ calculateSimpleInterest() }}</h2>
+  </div>
+</div>
+
+<script>
+const app = Vue.createApp({
+  data() {
+    return {
+      principal: 0,
+      interestRate: 0,
+      time: 0
+    };
+  },
+  methods: {
+    calculateSimpleInterest() {
+      const simpleInterest = (this.principal * this.interestRate * this.time) / 100;
+      return simpleInterest.toFixed(2); // Visar endast två decimaler
+    }
+  }
+});
+
+app.mount('#app');
+</script>
+
+</body>
+</html>

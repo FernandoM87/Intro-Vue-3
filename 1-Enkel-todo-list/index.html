@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue 3 Todo List</title>
+  <!-- Lägg till Vue-CDN här -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+</head>
+<body>
+
+
+
+<div id="app">
+  <h1>Todo List</h1>
+  
+  <!-- Input och knapp för att lägga till en todo -->
+  <div>
+
+    <input v-model="newTodo" type="text" placeholder="Write a new todo">
+    <button @click="addTodo">Add</button>
+
+  </div>
+  
+  <!-- Lista över todos -->
+  <ul>
+
+    <li v-for="(todo, index) in todos" :key="index">
+      {{ todo }}
+      <button @click="removeTodo(index)">Remove</button>
+    </li>
+    
+  </ul>
+
+</div>
+
+<script>
+const app = Vue.createApp({
+  data() {
+    return {
+      newTodo: '',
+      todos: []
+    };
+  },
+  methods: {
+    addTodo() {
+      if (this.newTodo.trim() !== '') {
+        this.todos.push(this.newTodo);
+        this.newTodo = ''; // Clear input
+      }
+    },
+    removeTodo(index) {
+      this.todos.splice(index, 1);
+    }
+  }
+});
+
+app.mount('#app');
+</script>
+
+</body>
+</html>
